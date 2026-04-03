@@ -13,7 +13,15 @@ USERS = [
 ]
 
 INCOME_CATEGORIES = ["Salary", "Freelance", "Investment", "Bonus", "Rental"]
-EXPENSE_CATEGORIES = ["Food", "Transport", "Utilities", "Entertainment", "Healthcare", "Shopping", "Rent"]
+EXPENSE_CATEGORIES = [
+    "Food",
+    "Transport",
+    "Utilities",
+    "Entertainment",
+    "Healthcare",
+    "Shopping",
+    "Rent",
+]
 
 
 def random_date(start: date, end: date) -> date:
@@ -31,7 +39,11 @@ def seed():
 
     users = []
     for u in USERS:
-        user = User(email=u["email"], hashed_password=hash_password(u["password"]), role=u["role"])
+        user = User(
+            email=u["email"],
+            hashed_password=hash_password(u["password"]),
+            role=u["role"],
+        )
         db.add(user)
         users.append(user)
 
@@ -46,7 +58,11 @@ def seed():
     for user in users:
         for _ in range(40):
             tx_type = random.choice(list(TransactionType))
-            category = random.choice(INCOME_CATEGORIES if tx_type == TransactionType.income else EXPENSE_CATEGORIES)
+            category = random.choice(
+                INCOME_CATEGORIES
+                if tx_type == TransactionType.income
+                else EXPENSE_CATEGORIES
+            )
             amount = round(random.uniform(100, 5000), 2)
             transactions.append(
                 Transaction(
