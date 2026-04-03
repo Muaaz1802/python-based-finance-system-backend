@@ -1,0 +1,8 @@
+D:
+.venv
+.pytest_cache
+test.db
+.env
+__pycache__
+tests/__pycache__
+*.pyc
